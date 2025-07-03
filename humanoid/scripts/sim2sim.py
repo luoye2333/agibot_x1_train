@@ -121,7 +121,7 @@ def get_obs(data,model):
         body_name = mujoco.mj_id2name(model, mujoco.mjtObj.mjOBJ_BODY, i)
         if '5_link' or 'ankle_roll' in body_name:  # according to model name
             foot_positions.append(data.xpos[i][2].copy().astype(np.double))
-            foot_forces.append(data.cfrc_ext[i][2].copy().astype(np.double)) 
+            foot_forces.append(data.cfrc_ext[i][5].copy().astype(np.double)) # cfrc_ext = [torque, force]
         if 'base_link' or 'waist_link' in body_name:  # according to model name
             base_pos = data.xpos[i][:3].copy().astype(np.double)
     return (q, dq, quat, v, omega, gvec, base_pos, foot_positions, foot_forces)
